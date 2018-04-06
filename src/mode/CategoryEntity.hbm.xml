@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="mode.CategoryEntity" table="category" schema="fruits">
+        <id name="categoryId" column="category_id"/>
+        <property name="categoryName" column="category_name"/>
+        <property name="totalFruit" column="total_fruit"/>
+        <property name="des" column="des"/>
+    </class>
+</hibernate-mapping>
