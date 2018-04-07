@@ -1,20 +1,34 @@
 package mode;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "category", schema = "fruits")
-public class CategoryEntity {
+
+public class CategoryEntity implements Serializable {
     private int categoryId;
     private String categoryName;
-    private Integer totalFruit;
     private String des;
-    private Set<FruitsEntity> fruitsEntityList;
+    private Set<FruitsEntity> fruitsEntityList = new HashSet<>();
+
+    public CategoryEntity() {
+
+    }
+
+    public CategoryEntity(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
     @Id
     @Column(name = "category_id")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getCategoryId() {
         return categoryId;
     }
@@ -34,16 +48,6 @@ public class CategoryEntity {
     }
 
     @Basic
-    @Column(name = "total_fruit")
-    public Integer getTotalFruit() {
-        return totalFruit;
-    }
-
-    public void setTotalFruit(Integer totalFruit) {
-        this.totalFruit = totalFruit;
-    }
-
-    @Basic
     @Column(name = "des")
     public String getDes() {
         return des;
@@ -53,7 +57,8 @@ public class CategoryEntity {
         this.des = des;
     }
 
-    @OneToMany(mappedBy="")
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY) //指定一对多的关联关系
+    @JoinColumn(name = "category_id",referencedColumnName = "CATEGORY_ID")
     public Set<FruitsEntity> getFruitsEntityList() {
         return fruitsEntityList;
     }
@@ -69,14 +74,13 @@ public class CategoryEntity {
         CategoryEntity that = (CategoryEntity) o;
         return categoryId == that.categoryId &&
                 Objects.equals(categoryName, that.categoryName) &&
-                Objects.equals(totalFruit, that.totalFruit) &&
                 Objects.equals(des, that.des);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(categoryId, categoryName, totalFruit, des);
+        return Objects.hash(categoryId, categoryName, des);
 
     }
 }

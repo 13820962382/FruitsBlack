@@ -1,4 +1,6 @@
+import dao.HibernateUtil;
 import mode.CategoryEntity;
+import mode.FruitsEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -7,6 +9,9 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Test {
 
     private static SessionFactory sessionFactory;
@@ -14,27 +19,31 @@ public class Test {
     private static Transaction transaction;
 
     public static void main(String args[]){
-//        创建Configuration对象：对应包含hibernate的基本配置信息（cfg）和对象关系映射信息（hbm）
-        Configuration configuration = new Configuration().configure();
-        //创建注册服务对象
-        StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
-        //创建会话工厂
-        sessionFactory = new MetadataSources(serviceRegistry).buildMetadata().buildSessionFactory();
-        //获取会话对象
-        session = sessionFactory.openSession();
-        //开启事务
-        transaction = session.beginTransaction();
+        session = HibernateUtil.getHibernateSession();
+        //创建一个水果对象
+        FruitsEntity fruitsEntity = new FruitsEntity("葡萄3","images/葡是是速度.png");
+        FruitsEntity fruitsEntity1 = new FruitsEntity("苹果2","images/啊大多数2.png");
+        FruitsEntity fruitsEntity2 = new FruitsEntity("苹果3","images/葡仨萄的3.png");
+        //将当水果对象加到set里
+        Set<FruitsEntity> set = new HashSet<>();
+        set.add(fruitsEntity);
+        set.add(fruitsEntity1);
+        set.add(fruitsEntity2);
+//        //创建分类对象
+//        CategoryEntity categoryEntity = new CategoryEntity("仁果类");
+//        categoryEntity.setDes("减肥");
+//        categoryEntity.setFruitsEntityList(set);
+       CategoryEntity categoryEntity =  session.get(CategoryEntity.class,"浆果类");
+//       FruitsEntity fruits =  session.get(FruitsEntity.class,7);
+//       fruitsEntity.setCategory(categoryEntity);
+//        fruits.setFruitsName("大榴莲");
+//        fruits.setFruitsImg("images/大榴莲.png");
+//       session.update(fruits);
+        //关闭session
+        HibernateUtil.closeSession(session);
 
-        CategoryEntity categoryEntity = new CategoryEntity();
-        categoryEntity.setCategoryName("仁果类水果");
-        categoryEntity.setTotalFruit(25);
-        categoryEntity.setDes("健康瘦身的");
-        session.save(categoryEntity);
-        //关闭事务
-        transaction.commit();
-        //关闭会话对象
-        session.close();
-        //关闭会话工厂
-        sessionFactory.close();
+        System.out.print("id :" + categoryEntity.getCategoryId()+"name:"+categoryEntity.getCategoryName());
+
+
     }
 }
