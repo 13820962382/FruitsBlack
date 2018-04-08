@@ -6,11 +6,10 @@
 </head>
 <body>
 <div class="page-header">
-    <a class="btn btn-primary" href="#">
+    <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#myModal">
         添加水果
     </a>
 </div>
-
 <table class="table table-bordered table-striped table-hover" style="margin-top: 20px">
     <thead class="">
     <tr>
@@ -55,5 +54,66 @@
     </tr>
     </tbody>
 </table>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    添加分类
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <!--表单-->
+                <form class="form-horizontal" role="form" method="post" action="/add.action?add=fruits&">
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-2 control-label">分类名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="firstname" placeholder="请输入分类名称">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastname" class="col-sm-2 control-label">分类说明（选填）</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="lastname" placeholder="请输入分类说明">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" id="addFruits">
+                    提交更改
+                </button>
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<script>
+    $(function(){
+        $("#addFruits").click(function(){
+            var firstname = $("#firstname").val()
+            if (firstname!=""&&firstname!=null){
+                // alert(firstname)
+                $(".form-horizontal").submit();
+            }
+        });
+    });
+
+</script>
+
 </body>
 </html>

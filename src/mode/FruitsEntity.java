@@ -78,6 +78,11 @@ public class FruitsEntity implements Serializable{
     }
 
     @Override
+    public String toString() {
+        return fruitsName;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

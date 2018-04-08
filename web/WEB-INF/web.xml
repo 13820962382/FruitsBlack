@@ -13,4 +13,15 @@
         <servlet-name>ftpServlet</servlet-name>
         <url-pattern>/ftp.action</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>addServlet</servlet-name>
+        <servlet-class>servlet.addServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addServlet</servlet-name>
+        <url-pattern>/add.action</url-pattern>
+    </servlet-mapping>
+
 </web-app>

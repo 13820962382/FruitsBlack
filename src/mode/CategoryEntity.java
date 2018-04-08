@@ -68,6 +68,11 @@ public class CategoryEntity implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return categoryName;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
