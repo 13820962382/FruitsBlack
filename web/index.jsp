@@ -72,6 +72,14 @@
         });
     }
 
+    $.ajax({
+        type: "get",
+        url: "/get.action",
+        success: function() {
+            alert("请求成功")
+        }
+    });
+
 </script>
 </body>
 </html>

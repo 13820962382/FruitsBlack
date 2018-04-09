@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "addServlet")
 public class addServlet extends HttpServlet {
@@ -28,8 +30,7 @@ public class addServlet extends HttpServlet {
             CategoryEntity category = new CategoryEntity();
             //判断分类名称是否存在
             if (HibernateUtil.isExist(category,"categoryName",request.getParameter("categoryName"))){
-                String result = "result";
-                request.setAttribute(result,"分类名称已存在");
+                request.setAttribute("result","分类名称已存在");
             }
             category.setCategoryName(request.getParameter("categoryName"));
             category.setDes(request.getParameter("des")!=null ? request.getParameter("des"):"");
@@ -48,24 +49,20 @@ public class addServlet extends HttpServlet {
             String category = request.getParameter("categoryName");
             //获取水果说明
             String des = request.getParameter("des")!=null ? request.getParameter("des"):"";
-            //判断分类名称是否存在,存在则保存水果
+            //获取分类的ID
             CategoryEntity categoryEntity = new CategoryEntity(category);
-            if (HibernateUtil.isExist(categoryEntity,"categoryName",request.getParameter("categoryName"))){
-                String result = "result";
-                request.setAttribute(result,"分类名称已存在");
-            }
-
+            List<CategoryEntity> list =  HibernateUtil.queryData(categoryEntity,"categoryName",category);
             //获取session对象
             Session session = HibernateUtil.getHibernateSession();
+
             FruitsEntity fruits = new FruitsEntity(fruitsName,fruitsImg);
             fruits.setFruitsName(fruitsName);
             fruits.setFruitsImg(fruitsImg);
-//            fruits.setCategory(categoryEntity);
+            fruits.setCategory(list.get(0)); //设置所属分类
             fruits.setDes(des);
             session.save(fruits);
             HibernateUtil.closeSession(session);
 
-            request.getRequestDispatcher("/?jsp/addCategory#").forward(request,response);
 
         }
 

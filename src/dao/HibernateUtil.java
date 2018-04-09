@@ -69,7 +69,7 @@ public class HibernateUtil {
      * 动态查询String型数据
      * 根据实体类查询单个字段并返回list
      * */
-    public static Object queryData(Object obj,String fledName,String value){
+    public static List queryData(Object obj,String fledName,String value){
         Session session =getHibernateSession();
         //获取类名
         String className = obj.getClass().toString();
@@ -78,13 +78,16 @@ public class HibernateUtil {
         String hql =  "from "+c+" where "+fledName+"="+"'"+value+"'";
         //获取查询对象
         Query query = session.createQuery(hql);
-        List<Object> list = query.list();
+        List list = query.list();
         closeSession(session);
 
-        return list.get(0);
+        return list;
 
     }
-
+    /*
+     * 动态查询int型数据
+     * 根据实体类查询单个字段并返回list
+     * */
     public static List queryData(Object obj,String fledName,int value){
         Session session =getHibernateSession();
         //获取类名
@@ -94,11 +97,26 @@ public class HibernateUtil {
         String hql =  "from "+c+" where "+fledName+"="+value;
         //获取查询对象
         Query query = session.createQuery(hql);
-        List<Object> list = query.list();
+        List list = query.list();
         closeSession(session);
 
         return list;
 
+    }
+
+    public static List queryData(Object obj){
+        Session session =getHibernateSession();
+        //获取类名
+        String className = obj.getClass().toString();
+        String c = className.replace("class","");
+        //拼接hql语句
+        String hql =  "from "+c;
+        //获取查询对象
+        Query query = session.createQuery(hql);
+        List list = query.list();
+        closeSession(session);
+
+        return list;
     }
 
 

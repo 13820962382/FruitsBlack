@@ -34,7 +34,7 @@ public class FtpServlet extends HttpServlet {
         try {
             smartUpload.upload();
 //            String getFileName = smartUpload.getFiles().getFile(0).getFileName();
-            System.out.println("长传文件的数量："+smartUpload.getFiles().getCount());
+            System.out.println("上传文件的数量："+smartUpload.getFiles().getCount());
             smartUpload.save(filePath);//保存路径
 
         } catch (SmartUploadException e) {

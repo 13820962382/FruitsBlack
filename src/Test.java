@@ -21,13 +21,9 @@ public class Test {
     private static Transaction transaction;
 
     public static void main(String args[]){
-        FruitsEntity fruitsEntity = new FruitsEntity();
-        if (HibernateUtil.isExist(fruitsEntity,"fruitsName","苹果")){
-            System.out.println("存在");
-        }else {
-            System.out.println("不存在");
-        }
+        List<CategoryEntity> list =   HibernateUtil.queryData(new CategoryEntity(),"categoryName","收到");
 
+        System.out.println(list.get(0).getCategoryId());
 
     }
 }

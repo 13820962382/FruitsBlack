@@ -24,4 +24,15 @@
         <url-pattern>/add.action</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>getServlet</servlet-name>
+        <servlet-class>servlet.getServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>getServlet</servlet-name>
+        <url-pattern>/get.action</url-pattern>
+    </servlet-mapping>
+
 </web-app>
