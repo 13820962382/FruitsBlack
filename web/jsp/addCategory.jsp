@@ -1,3 +1,6 @@
+<%@ page import="java.util.Set" %>
+<%@ page import="mode.FruitsEntity" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="zh-CN">
@@ -21,38 +24,17 @@
     </tr>
     </thead>
     <tbody>
+    <c:forEach items="${categoryList}" var="category" varStatus="status">
     <tr>
-        <td>苹果</td>
-        <td>9</td>
-        <td>水果瘦身</td>
+        <td>${category.categoryName}</td>
+        <td>${category.totalFruits}</td>
+        <td>${category.des}</td>
         <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
             <a href="#">修改</a>
         </td>
     </tr>
-    <tr>
-        <td>苹果</td>
-        <td>9</td>
-        <td>水果瘦身</td>
-        <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
-            <a href="#">修改</a>
-        </td>
-    </tr>
-    <tr>
-        <td>苹果</td>
-        <td>9</td>
-        <td>水果瘦身</td>
-        <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
-            <a href="#">修改</a>
-        </td>
-    </tr>
-    <tr>
-        <td>苹果</td>
-        <td>9</td>
-        <td>水果瘦身</td>
-        <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
-            <a href="#">修改</a>
-        </td>
-    </tr>
+    </c:forEach>
+
     </tbody>
 </table>
 
@@ -111,6 +93,18 @@
                 $(".form-horizontal").submit();
             }
         });
+    });
+
+    $.ajax({
+        // data:'',
+        type: "get",
+        url: "/get.action?type=category",
+        dataType:'json',
+        success: function(data) {
+            // alert("请求成功")
+            // alert(data.message)
+
+        }
     });
 
 </script>

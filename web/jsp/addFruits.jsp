@@ -29,38 +29,16 @@
     </tr>
     </thead>
     <tbody>
+    <c:forEach items="${fruitsList}" var="fruits" varStatus="status">
     <tr>
-        <td>苹果</td>
-        <td>仁果类水果</td>
-        <td>水果瘦身</td>
+        <td>${fruits.fruitsName}</td>
+        <td>${fruits.category}</td>
+        <td>${fruits.des}</td>
         <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
             <a href="#">修改</a>
         </td>
     </tr>
-    <tr>
-        <td>梨</td>
-        <td>核果类水果</td>
-        <td>水果瘦身</td>
-        <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
-            <a href="#">修改</a>
-        </td>
-    </tr>
-    <tr>
-        <td>葡萄</td>
-        <td>浆果类水果</td>
-        <td>水果瘦身</td>
-        <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
-            <a href="#">修改</a>
-        </td>
-    </tr>
-    <tr>
-        <td>苹果</td>
-        <td>9</td>
-        <td>水果瘦身</td>
-        <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
-            <a href="#">修改</a>
-        </td>
-    </tr>
+    </c:forEach>
     </tbody>
 </table>
 
@@ -94,7 +72,7 @@
                         <div class="col-sm-10">
                             <select class="form-control input-sm" id="select" name="categoryName">
                                 <c:forEach items="${categoryList}" var="category" varStatus="status">
-                                    <option value="${category.categoryName}">${category.categoryName}</option>
+                                    <option value="${category.categoryName}"> ${category.categoryName} </option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -207,6 +185,18 @@
                 $(".form-horizontal").submit();
             }
         });
+    });
+
+    $.ajax({
+        // data:'',
+        type: "get",
+        url: "/get.action?type=fruits",
+        dataType:'json',
+        success: function(data) {
+            // alert("请求成功")
+            // alert(data.message)
+
+        }
     });
 </script>
 

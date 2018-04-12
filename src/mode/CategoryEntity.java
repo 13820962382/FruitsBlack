@@ -16,6 +16,7 @@ public class CategoryEntity implements Serializable {
     private int categoryId;
     private String categoryName;
     private String des;
+    private int totalFruits;
     private Set<FruitsEntity> fruitsEntityList = new HashSet<>();
 
     public CategoryEntity() {
@@ -65,6 +66,15 @@ public class CategoryEntity implements Serializable {
 
     public void setFruitsEntityList(Set<FruitsEntity> fruitsEntityList) {
         this.fruitsEntityList = fruitsEntityList;
+    }
+
+    public int getTotalFruits() {
+        totalFruits = fruitsEntityList.size();
+        return totalFruits;
+    }
+
+    public void setTotalFruits(int totalFruits) {
+        this.totalFruits = totalFruits;
     }
 
     @Override

@@ -16,7 +16,9 @@ import java.io.InputStream;
 @WebServlet(name = "servlet.FtpServlet")
 public class FtpServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        request.getParameter()
+
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
 
         String filePath = getServletContext().getRealPath("/") + "upload";
         File file = new File(filePath);

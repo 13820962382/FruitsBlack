@@ -74,9 +74,9 @@
 
     $.ajax({
         type: "get",
-        url: "/get.action",
+        url: "/get.action?type=category",
         success: function() {
-            alert("请求成功")
+            // alert("请求成功")
         }
     });
 

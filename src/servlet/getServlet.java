@@ -30,15 +30,23 @@ public class getServlet extends HttpServlet {
         categoryList =HibernateUtil.queryData(new CategoryEntity());
         //查询所有水果
         List<FruitsEntity> fruitsList = new ArrayList<>();
-        fruitsList =  HibernateUtil.queryData(new CategoryEntity());
+        fruitsList =  HibernateUtil.queryData(new FruitsEntity());
 
-        String category = "打算是否";
-        request.getSession().setAttribute("categoryList",categoryList);
-        request.setAttribute("test0",categoryList);
+        if (request.getParameter("type").equals("category")){
+
+            request.getSession().setAttribute("categoryList",categoryList);
+            request.getRequestDispatcher("/jsp/addCategory.jsp").forward(request,response);
+
+        }
+        if (request.getParameter("type").equals("fruits")){
+
+            request.getSession().setAttribute("fruitsList",fruitsList);
+            request.getRequestDispatcher("/jsp/addFruits.jsp").forward(request,response);
+
+        }
 
 //        request.setAttribute("categoryList",category);
 //        request.setAttribute("fruitsList",fruitsList);
 
-        request.getRequestDispatcher("/jsp/addFruits.jsp").forward(request,response);
     }
 }
