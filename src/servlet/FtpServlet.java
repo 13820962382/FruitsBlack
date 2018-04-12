@@ -35,7 +35,9 @@ public class FtpServlet extends HttpServlet {
         smartUpload.setAllowedFilesList("png,jpg,gif");
         try {
             smartUpload.upload();
-//            String getFileName = smartUpload.getFiles().getFile(0).getFileName();
+            String getFileName = smartUpload.getFiles().getFile(0).getFileName();
+//            String path = new String(getFileName.getBytes("ISO-8859-1"), "GBK");
+
             System.out.println("上传文件的数量："+smartUpload.getFiles().getCount());
             smartUpload.save(filePath);//保存路径
 
