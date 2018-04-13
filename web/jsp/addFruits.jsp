@@ -29,16 +29,30 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${fruitsList}" var="fruits" varStatus="status">
-    <tr>
-        <td>${fruits.fruitsName}</td>
-        <td>${fruits.category}</td>
-        <td>${fruits.des}</td>
-        <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
-            <a href="#">修改</a>
-        </td>
-    </tr>
-    </c:forEach>
+    <c:choose>
+        <c:when test="${fruitsList!=null}">
+            <c:forEach items="${fruitsList}" var="fruits" varStatus="status">
+            <tr>
+                <td>${fruits.fruitsName}</td>
+                <td>${fruits.category}</td>
+                <td>${fruits.des}</td>
+                <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
+                    <a href="#">修改</a>
+                </td>
+            </tr>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <tr>
+                <td>无数据</td>
+                <td>无数据</td>
+                <td>无数据</td>
+                <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
+                    <a href="#">修改</a>
+                </td>
+            </tr>
+        </c:otherwise>
+    </c:choose>
     </tbody>
 </table>
 
@@ -71,9 +85,17 @@
                         <label for="select" class="col-sm-2 control-label">所属分类</label>
                         <div class="col-sm-10">
                             <select class="form-control input-sm" id="select" name="categoryName">
-                                <c:forEach items="${categoryList}" var="category" varStatus="status">
-                                    <option value="${category.categoryName}"> ${category.categoryName} </option>
-                                </c:forEach>
+                                <c:choose>
+                                    <c:when test="${categoryList!=null}">
+                                        <c:forEach items="${categoryList}" var="category" varStatus="status">
+                                            <option value="${category.categoryName}"> ${category.categoryName} </option>
+                                        </c:forEach>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option>请先创建分类</option>
+                                    </c:otherwise>
+                                </c:choose>
+
                             </select>
                         </div>
                     </div>

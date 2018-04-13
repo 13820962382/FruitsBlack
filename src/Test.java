@@ -21,13 +21,11 @@ public class Test {
     private static Transaction transaction;
 
     public static void main(String args[]){
-        List<CategoryEntity> list =   HibernateUtil.queryData(new CategoryEntity());
-
-        for (CategoryEntity categoryEntity:
-             list) {
-            System.out.println(categoryEntity.getCategoryName());
-        }
-
+        CategoryEntity category = new CategoryEntity("浆果类");
+        Session session =  HibernateUtil.getHibernateSession();
+        //保存分类
+        session.save(category);
+        HibernateUtil.closeSession(session);
 
     }
 }

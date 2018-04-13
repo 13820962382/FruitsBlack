@@ -24,16 +24,31 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${categoryList}" var="category" varStatus="status">
-    <tr>
-        <td>${category.categoryName}</td>
-        <td>${category.totalFruits}</td>
-        <td>${category.des}</td>
-        <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
-            <a href="#">修改</a>
-        </td>
-    </tr>
-    </c:forEach>
+    <c:choose>
+        <c:when test="${categoryList!=null}">
+            <c:forEach items="${categoryList}" var="category" varStatus="status">
+                <tr>
+                    <td>${category.categoryName}</td>
+                    <td>${category.totalFruits}</td>
+                    <td>${category.des}</td>
+                    <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
+                        <a href="#">修改</a>
+                    </td>
+                </tr>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+
+            <tr>
+                <td>无数据</td>
+                <td>无数据</td>
+                <td>无数据</td>
+                <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
+                    <a href="#">修改</a>
+                </td>
+            </tr>
+        </c:otherwise>
+    </c:choose>
 
     </tbody>
 </table>
