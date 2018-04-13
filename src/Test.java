@@ -21,9 +21,13 @@ public class Test {
     private static Transaction transaction;
 
     public static void main(String args[]){
-        List<CategoryEntity> list =   HibernateUtil.queryData(new CategoryEntity(),"categoryName","收到");
+        List<CategoryEntity> list =   HibernateUtil.queryData(new CategoryEntity());
 
-        System.out.println(list.get(0).getCategoryId());
+        for (CategoryEntity categoryEntity:
+             list) {
+            System.out.println(categoryEntity.getCategoryName());
+        }
+
 
     }
 }

@@ -23,13 +23,13 @@
       <div class="bg-info h2">管理菜单</div>
       <ul class="nav nav-pills nav-stacked " style="border-top:solid 1px white">
         <h3>分类管理</h3>
-        <li class="nav-tabs-justified" onclick="changeRight('jsp/addCategory')"><a href="#">添加分类</a></li>
-        <li class="nav-tabs-justified" onclick="changeRight('jsp/addFruits')"><a href="#">添加水果</a></li>
+        <li class="nav-tabs-justified" onclick="changeRight('jsp/addCategory.jsp')"><a href="#">添加分类</a></li>
+        <li class="nav-tabs-justified" onclick="changeRight('jsp/addFruits.jsp')"><a href="#">添加水果</a></li>
       </ul>
 
       <ul class="nav nav-pills nav-stacked ">
         <h3>图片管理</h3>
-        <li class="nav-tabs-justified"><a href="#" onclick="changeRight('jsp/upload')">上传图片</a></li>
+        <li class="nav-tabs-justified"><a href="#" onclick="changeRight('jsp/upload.jsp')">上传图片</a></li>
         <li class="nav-tabs-justified"><a href="#" onclick="changeRight('')">编辑文字</a></li>
       </ul>
     </div>
@@ -62,23 +62,38 @@
         var newurl = oldurl + '?' + url;
         history.pushState(null, null, newurl);
         // var ajaxurl = url + '.html'
-        var ajaxurl = url + '.jsp'
+        var ajaxurl = url
         $.ajax({
             type: "post",
             url: ajaxurl,
             success: function(html) {
                 $('#content').html(html);
+            },
+            error:function () {
+                alert("请求失败")
+            }
+        });
+
+    };
+
+
+    //获取分类和水果列表
+    getAction()
+    function getAction() {
+        $.ajax({
+            type: "get",
+            url: "/get.action",
+            success: function() {
+                // alert("请求成功 刷新页面")
+
+            },
+            error:function () {
+                alert("请求Category失败")
             }
         });
     }
 
-    $.ajax({
-        type: "get",
-        url: "/get.action?type=category",
-        success: function() {
-            // alert("请求成功")
-        }
-    });
+
 
 </script>
 </body>

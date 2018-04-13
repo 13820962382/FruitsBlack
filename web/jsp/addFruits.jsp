@@ -187,17 +187,21 @@
         });
     });
 
-    $.ajax({
-        // data:'',
-        type: "get",
-        url: "/get.action?type=fruits",
-        dataType:'json',
-        success: function(data) {
-            // alert("请求成功")
-            // alert(data.message)
+    //获取水果列表
+    function getFruits() {
+        $.ajax({
+            type: "get",
+            url: "/get.action?type=fruits",
+            success: function(html) {
+                // alert("请求成功 刷新fruits页面")
+                // $('#content').html(html);
+            },
+            error:function () {
+                alert("请求fruits失败")
+            }
+        });
+    }
 
-        }
-    });
 </script>
 
 </body>

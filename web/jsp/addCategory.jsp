@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="page-header">
-    <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#categoryModal">
+    <a class="btn btn-primary" href="#" onclick="getFruits()" data-toggle="modal" data-target="#categoryModal">
         添加分类
     </a>
 </div>
@@ -95,18 +95,19 @@
         });
     });
 
-    $.ajax({
-        // data:'',
-        type: "get",
-        url: "/get.action?type=category",
-        dataType:'json',
-        success: function(data) {
-            // alert("请求成功")
-            // alert(data.message)
-
-        }
-    });
-
+    //获取分类列表
+    function getCategory() {
+        $.ajax({
+            type: "get",
+            url: "/get.action?type=category",
+            success: function(html) {
+                // alert("请求成功 刷新category页面")
+            },
+            error:function () {
+                alert("请求category失败")
+            }
+        });
+    }
 </script>
 
 </body>
