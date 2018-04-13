@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,28 +26,17 @@ public class getServlet extends HttpServlet {
 
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
+        PrintWriter out =  response.getWriter();
+
         //查询所有分类
         List<CategoryEntity> categoryList = new ArrayList<>();
         categoryList =HibernateUtil.queryData(new CategoryEntity());
         //查询所有水果
         List<FruitsEntity> fruitsList = new ArrayList<>();
         fruitsList =  HibernateUtil.queryData(new FruitsEntity());
+        request.getSession().setAttribute("categoryList",categoryList);
+        request.getSession().setAttribute("fruitsList",fruitsList);
 
-        if (request.getParameter("type").equals("category")){
-
-            request.getSession().setAttribute("categoryList",categoryList);
-            request.getRequestDispatcher("/jsp/addCategory.jsp").forward(request,response);
-
-        }
-        if (request.getParameter("type").equals("fruits")){
-
-            request.getSession().setAttribute("fruitsList",fruitsList);
-            request.getRequestDispatcher("/jsp/addFruits.jsp").forward(request,response);
-
-        }
-
-//        request.setAttribute("categoryList",category);
-//        request.setAttribute("fruitsList",fruitsList);
-
+//        String type = request.getParameter("type");
     }
 }
