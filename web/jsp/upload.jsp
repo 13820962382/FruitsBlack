@@ -20,7 +20,7 @@
     <div id="imgPath">${result}</div>
 </div>
 
-<form action="ftp.action" method="post" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath}/ftp.action" method="post" enctype="multipart/form-data">
     <input id="myFile" name="myFile"  class="input-lg" type="file">
     <input type="submit" name="post" value="上传到服务器"/>
 </form>

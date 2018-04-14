@@ -73,7 +73,7 @@
             <div class="modal-body">
 
                 <!--表单-->
-                <form class="form-horizontal" role="form" method="post" action="/add.action?add=fruits&">
+                <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/add.action?add=fruits&">
                     <div class="form-group">
                         <label for="firstName" class="col-sm-2 control-label">水果名称</label>
                         <div class="col-sm-10">

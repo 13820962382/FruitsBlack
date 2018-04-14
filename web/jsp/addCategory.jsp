@@ -68,7 +68,7 @@
             <div class="modal-body">
 
                 <!--表单-->
-                <form class="form-horizontal" role="form" method="post" action="/add.action">
+                <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/add.action?type=category">
                     <input type="hidden" name="add" value="category"/>
                     <div class="form-group">
                         <label for="firstname" class="col-sm-2 control-label">分类名称</label>
