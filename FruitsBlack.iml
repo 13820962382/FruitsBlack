@@ -16,6 +16,8 @@
       <configuration>
         <datasource-map>
           <unit-entry name="hibernate.cfg.xml" />
+          <unit-entry name="out:artifacts:FruitsBlack_war_exploded:WEB-INF:classes:hibernate.cfg.xml" />
+          <unit-entry name="out:production:FruitsBlack:hibernate.cfg.xml" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/out/artifacts/FruitsBlack_war_exploded/WEB-INF/classes/hibernate.cfg.xml" />

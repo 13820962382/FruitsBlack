@@ -73,7 +73,7 @@
             <div class="modal-body">
 
                 <!--表单-->
-                <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/add.action?add=fruits&">
+                <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/fileUpload.action" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="firstName" class="col-sm-2 control-label">水果名称</label>
                         <div class="col-sm-10">
@@ -103,7 +103,7 @@
                     <div class="form-group">
                         <label for="desName" class="col-sm-2 control-label">水果说明（选填）</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="desName" placeholder="请输入分类说明">
+                            <input type="text" class="form-control" name="des" id="desName" placeholder="请输入分类说明">
                         </div>
                     </div>
 
@@ -114,7 +114,7 @@
                         </div>
 
                         <div class="">
-                            <img id="previewImg" width="200px" height="300px" src="../images/logo透明背景.png">
+                            <img id="previewImg" width="200px" height="300px" src="${pageContext.request.contextPath}/images/logo透明背景.png">
                         </div>
                     </div>
 
@@ -209,20 +209,6 @@
         });
     });
 
-    //获取水果列表
-    function getFruits() {
-        $.ajax({
-            type: "get",
-            url: "/get.action?type=fruits",
-            success: function(html) {
-                // alert("请求成功 刷新fruits页面")
-                // $('#content').html(html);
-            },
-            error:function () {
-                alert("请求fruits失败")
-            }
-        });
-    }
 
 </script>
 

@@ -1,5 +1,7 @@
 package servlet;
 
+import com.jspsmart.upload.SmartUpload;
+import com.jspsmart.upload.SmartUploadException;
 import dao.HibernateUtil;
 import mode.CategoryEntity;
 import mode.FruitsEntity;
@@ -39,9 +41,28 @@ public class addServlet extends HttpServlet {
             //保存分类
             session.save(category);
             HibernateUtil.closeSession(session);
-            request.getRequestDispatcher("/?jsp/addFruits#").forward(request,response);
+            request.getRequestDispatcher("/jsp/addCategory.jsp").forward(request,response);
         }else if (add.equals("fruits")){
-            //获取添加的水果名
+            //保存图片
+            //初始化smartUpload
+            SmartUpload smartUpload = new SmartUpload();
+            smartUpload.initialize(getServletConfig(),request,response);
+            //设置文件上传的最大限制
+            smartUpload.setMaxFileSize(1024*1024*10);
+            //设置文件上传的类型
+            smartUpload.setAllowedFilesList("png,jpg,gif");
+            try {
+                smartUpload.upload();
+                String getFileName = smartUpload.getFiles().getFile(0).getFileName();
+//            String path = new String(getFileName.getBytes("ISO-8859-1"), "GBK");
+
+                String filePath = "/data/fruits/images";
+                smartUpload.save(filePath);//保存路径
+
+            } catch (SmartUploadException e) {
+                e.printStackTrace();
+            }
+        //获取添加的水果名
             String fruitsName = request.getParameter("fruitsName");
             //获取添加的水果图片
             String fruitsImg = request.getParameter("fruitsImg");

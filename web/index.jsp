@@ -82,13 +82,13 @@
     function getAction() {
         $.ajax({
             type: "get",
-            url: "/get.action",
+            url: "http://kidle.club:8080/fruitsmanager/get.action",
             success: function() {
                 // alert("请求成功 刷新页面")
 
             },
             error:function () {
-                alert("请求Category失败")
+                alert("请求数据失败")
             }
         });
     }

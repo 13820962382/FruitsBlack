@@ -68,7 +68,7 @@
             <div class="modal-body">
 
                 <!--表单-->
-                <form class="form-horizontal" role="form" method="post" action="${pageContext.request.contextPath}/add.action?type=category">
+                <form class="form-horizontal" id="form1" role="form" method="post" action="#">
                     <input type="hidden" name="add" value="category"/>
                     <div class="form-group">
                         <label for="firstname" class="col-sm-2 control-label">分类名称</label>
@@ -105,7 +105,20 @@
             var firstname = $("#firstname").val()
             if (firstname!=""&&firstname!=null){
                 // alert(firstname)
-                $(".form-horizontal").submit();
+                $.ajax({
+                    type: "post",
+                    data: $('#form1').serialize(),
+                    url: "http://kidle.club:8080/fruitsmanager/add.action?type=category",
+                    success: function(html) {
+                        // alert("请求成功 刷新category页面")
+                        $(".form-horizontal").submit();
+                        $('#content').html(html);
+                    },
+                    error:function () {
+                        alert("添加category失败")
+                    }
+                });
+
             }
         });
     });
