@@ -25,6 +25,7 @@ public class HibernateUtil {
         Configuration configuration = new Configuration().configure();
         //创建注册服务对象
         serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
+//        serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         //创建会话工厂
         sessionFactory = new MetadataSources(serviceRegistry).buildMetadata().buildSessionFactory();
         //获取会话对象

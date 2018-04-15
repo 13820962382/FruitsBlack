@@ -1,5 +1,7 @@
 package servlet;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import dao.HibernateUtil;
 import mode.CategoryEntity;
 import mode.FruitsEntity;
@@ -14,6 +16,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+import static javafx.scene.input.KeyCode.F;
 
 @WebServlet(name = "getServlet")
 public class getServlet extends HttpServlet {
@@ -26,17 +31,34 @@ public class getServlet extends HttpServlet {
 
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
+        response.setContentType("application/json;charset=utf-8");
         PrintWriter out =  response.getWriter();
 
         //查询所有分类
-        List<CategoryEntity> categoryList = new ArrayList<>();
+        List<CategoryEntity> categoryList = new ArrayList();
         categoryList =HibernateUtil.queryData(new CategoryEntity());
         //查询所有水果
-        List<FruitsEntity> fruitsList = new ArrayList<>();
+        List<FruitsEntity> fruitsList = new ArrayList();
         fruitsList =  HibernateUtil.queryData(new FruitsEntity());
         request.getSession().setAttribute("categoryList",categoryList);
         request.getSession().setAttribute("fruitsList",fruitsList);
 
-//        String type = request.getParameter("type");
+        JSONArray jsonArray = new JSONArray();
+        for (CategoryEntity category : categoryList) {
+            JSONObject categoryJson = (JSONObject) JSONObject.toJSON(category);
+            if (categoryJson.getString("fruitsEntityList")!=null){
+                Set<FruitsEntity> fruitsSet =  category.getFruitsEntityList();
+                for (FruitsEntity fruits : fruitsSet) {
+                    jsonArray.add(JSONObject.toJSON(fruits));
+                    out.write(jsonArray.toString());
+
+                }
+
+            }
+            out.write(categoryJson.toString());
+        }
+
+
+
     }
 }

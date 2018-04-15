@@ -48,7 +48,7 @@ public class FileUploadServlet extends HttpServlet {
         // 设置允许上传的最大文件大小 10M
         fileUpload.setSizeMax(10 * 1024 * 1024);
         //创建容器来存放解析内容
-        List<FileItem> fileItems = new ArrayList<>();
+        List<FileItem> fileItems = new ArrayList();
         //将上传的文件信息放入容器中
         try {
             fileItems = fileUpload.parseRequest(request);
