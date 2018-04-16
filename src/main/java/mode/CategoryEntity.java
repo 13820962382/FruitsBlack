@@ -59,11 +59,11 @@ public class CategoryEntity implements Serializable {
 
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY) //指定一对多的关联关系
     @JoinColumn(name = "category_id",referencedColumnName = "CATEGORY_ID")
-    public Set<FruitsEntity> getFruitsEntityList() {
+    public Set<FruitsEntity> getFruitsEntitySet() {
         return fruitsEntityList;
     }
 
-    public void setFruitsEntityList(Set<FruitsEntity> fruitsEntityList) {
+    public void setFruitsEntitySet(Set<FruitsEntity> fruitsEntityList) {
         this.fruitsEntityList = fruitsEntityList;
     }
 

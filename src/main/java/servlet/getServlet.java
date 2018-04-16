@@ -18,10 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static javafx.scene.input.KeyCode.F;
 
 @WebServlet(name = "getServlet")
 public class getServlet extends HttpServlet {
+    private static final String IMG_PATH = "http://kidle.club:8080/upload/";
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         doGet(request,response);
@@ -43,20 +44,32 @@ public class getServlet extends HttpServlet {
         request.getSession().setAttribute("categoryList",categoryList);
         request.getSession().setAttribute("fruitsList",fruitsList);
 
-        JSONArray jsonArray = new JSONArray();
-        for (CategoryEntity category : categoryList) {
-            JSONObject categoryJson = (JSONObject) JSONObject.toJSON(category);
-            if (categoryJson.getString("fruitsEntityList")!=null){
-                Set<FruitsEntity> fruitsSet =  category.getFruitsEntityList();
-                for (FruitsEntity fruits : fruitsSet) {
-                    jsonArray.add(JSONObject.toJSON(fruits));
-                    out.write(jsonArray.toString());
-
+        //将对象解析成json数据返回客户端
+        JSONObject responseJson = new JSONObject();
+        JSONArray dataJsonArray = new JSONArray();
+        for (int i = 0; i < categoryList.size(); i++)  {
+           JSONObject dataJson = new JSONObject();
+            JSONArray fruitsArray = new JSONArray();
+            if (categoryList.get(i).getFruitsEntitySet().size()!=0){
+                Set<FruitsEntity> fruitsSet = categoryList.get(i).getFruitsEntitySet();
+                for (FruitsEntity fruitsEntity: fruitsSet) {
+                    JSONObject fruitsJson = new JSONObject();
+                    fruitsJson.put("fruitsName",fruitsEntity.getFruitsName());
+                    fruitsJson.put("categoryName",fruitsEntity.getCategory().getCategoryName());
+                    fruitsJson.put("fruitsDes",fruitsEntity.getDes());
+                    fruitsJson.put("fruitsImg",IMG_PATH + fruitsEntity.getFruitsImg());
+                    fruitsArray.add(fruitsJson);
                 }
-
             }
-            out.write(categoryJson.toString());
+            dataJson.put("categoryId",categoryList.get(i).getCategoryId());
+            dataJson.put("categoryName",categoryList.get(i).getCategoryName());
+            dataJson.put("categoryDes",categoryList.get(i).getDes());
+            dataJson.put("totalFruits",categoryList.get(i).getTotalFruits());
+            dataJson.put("fruitsList",fruitsArray);
+            dataJsonArray.add(dataJson);
         }
+        responseJson.put("data",dataJsonArray);
+        out.write(responseJson.toString());
 
 
 

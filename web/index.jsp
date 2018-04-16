@@ -82,7 +82,8 @@
     function getAction() {
         $.ajax({
             type: "get",
-            url: "http://kidle.club:8080/fruitsmanager/get.action",
+           url: "http://kidle.club:8080/fruitsmanager/get.action",
+            // url: "/get.action",
             success: function() {
                 // alert("请求成功 刷新页面")
 

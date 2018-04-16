@@ -31,7 +31,7 @@ public class Test {
             jsonobj = new JSONObject();
             jsonobj.put("category",category.getCategoryName());
             jsonobj.put("categoryDes",category.getDes());
-            jsonobj.put("fruits",category.getFruitsEntityList());
+            jsonobj.put("fruits",category.getFruitsEntitySet());
             jsonobj.put("totalFruits",category.getTotalFruits());
             jsonarray.add(jsonobj);
         }
