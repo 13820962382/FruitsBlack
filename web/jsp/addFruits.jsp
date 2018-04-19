@@ -132,6 +132,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
+
 <script>
     function getIeVersion() {
         var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
