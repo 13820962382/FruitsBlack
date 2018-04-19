@@ -1,6 +1,7 @@
 package dao;
 
 import mode.CategoryEntity;
+import mode.FruitsEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -105,6 +106,9 @@ public class HibernateUtil {
 
     }
 
+    /*
+    * 查询数据
+    * */
     public static List queryData(Object obj){
         Session session =getHibernateSession();
         //获取类名
@@ -119,6 +123,8 @@ public class HibernateUtil {
 
         return list;
     }
+
+
 
 
 }

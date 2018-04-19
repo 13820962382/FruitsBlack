@@ -33,7 +33,7 @@ public class getServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json;charset=utf-8");
-//        response.setHeader("Access-Control-Allow-Origin", "*");//解决跨域访问问题
+        response.setHeader("Access-Control-Allow-Origin", "*");//解决跨域访问问题
         PrintWriter out =  response.getWriter();
 
         //查询所有分类
@@ -66,7 +66,7 @@ public class getServlet extends HttpServlet {
             dataJson.put("categoryName",categoryList.get(i).getCategoryName());
             dataJson.put("categoryDes",categoryList.get(i).getDes());
             dataJson.put("totalFruits",categoryList.get(i).getTotalFruits());
-            dataJson.put("fruitsList",fruitsArray);
+            dataJson.put("fruits",fruitsArray);
             dataJsonArray.add(dataJson);
         }
         responseJson.put("data",dataJsonArray);

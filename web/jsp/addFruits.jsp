@@ -36,8 +36,8 @@
                 <td>${fruits.fruitsName}</td>
                 <td>${fruits.category}</td>
                 <td>${fruits.des}</td>
-                <td><a href="#">删除</a> &nbsp;&nbsp;&nbsp;
-                    <a href="#">修改</a>
+                <td><a href="/delete.action?type=fruits&fruitsId=${fruits.fruitsId}">删除</a> &nbsp;&nbsp;&nbsp;
+                    <a href="modify.jsp">修改</a>
                 </td>
             </tr>
             </c:forEach>
@@ -199,6 +199,8 @@
 </script>
 
 <script>
+
+    //添加水果
     $(function(){
         $("#addFruits").click(function(){
             var firstName = $("#firstName").val()

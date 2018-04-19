@@ -11,34 +11,6 @@
   <script src="js/bootstrap.min.js"></script>
 
   <title>水果专家后台管理</title>
-    <script>
-        $.ajax({
-            type:"get",
-            dataType: "json",
-            url:"/get.action",
-            beforeSend:function () {
-
-            },
-            success:function (data) {
-                var json = eval(data.data)
-                // var jsonArray = eval(data.data.fruitsList)
-                $.each(json,function (index, item) {
-                    var categoryName = json[index].categoryName;//获取分类名称
-                    var fruits = json[index].fruitsList;//获取水果列表
-                    $.each(fruits,function(index,item){
-                        var fruitName = fruits[index].fruitsName;
-                        $(this).html()
-                        alert("请求数据成功---"+categoryName+":"+fruitName);
-                    });
-
-                });
-                // alert("请求数据成功"+data.data.categoryName)
-            },
-            error:function () {
-                alert("请求数据失败")
-            }
-        })
-    </script>
 
 </head>
 <body>
@@ -105,19 +77,19 @@
 
     };
 
-
     //获取分类和水果列表
-   // getAction()
+     getAction()
     function getAction() {
         $.ajax({
             type: "get",
-            url: "http://kidle.club:8080/fruitsmanager/get.action",
+            // url: "http://kidle.club:8080/fruitsmanager/get.action", //服务调试
+            url: "/get.action",//本地调试
             success: function() {
                 // alert("请求成功 刷新页面")
 
             },
             error:function () {
-                alert("请求数据失败")
+                alert("请求数据失败" )
             }
         });
     }

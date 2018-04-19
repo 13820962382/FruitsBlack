@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.url">jdbc:mysql://localhost:3306/fruits</property>
+    <property name="connection.url">jdbc:mysql://localhost/fruits</property>
     <!--配置jdbc驱动-->
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
     <!--数据库用户名-->

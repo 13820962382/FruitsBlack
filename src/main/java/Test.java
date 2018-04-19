@@ -26,17 +26,9 @@ public class Test {
         JSONObject jsonobj;
 
         List<CategoryEntity> categoryList =HibernateUtil.queryData(new CategoryEntity());
-        JSONArray jsonarray = new JSONArray();
-        for (CategoryEntity category : categoryList) {
-            jsonobj = new JSONObject();
-            jsonobj.put("category",category.getCategoryName());
-            jsonobj.put("categoryDes",category.getDes());
-            jsonobj.put("fruits",category.getFruitsEntitySet());
-            jsonobj.put("totalFruits",category.getTotalFruits());
-            jsonarray.add(jsonobj);
-        }
-        System.out.print(jsonarray.toString());
-        System.out.print(categoryList.size());
+//        HibernateUtil.deleteData(categoryList.get(0));
+//        System.out.print(categoryList.get(0).getCategoryName());
+//        System.out.println(categoryList.size());
 
 
     }
