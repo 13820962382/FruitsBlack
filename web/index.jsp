@@ -39,7 +39,7 @@
 
     <!--右侧内容-->
     <div class="col-md-11" id="content">
-      <h1 class="page-header"><i class="fa fa-cog fa-spin"></i>&nbsp;控制台<small>&nbsp;&nbsp;&nbsp;欢迎使用XXX后台管理系统</small></h1>
+      <h1 class="page-header"><i class="fa fa-cog fa-spin"></i>&nbsp;控制台<small>&nbsp;&nbsp;&nbsp;欢迎使用水果专家后台管理系统</small></h1>
       <h4>
         <strong>使用指南：</strong><br>
         <br><br>默认页面内容……

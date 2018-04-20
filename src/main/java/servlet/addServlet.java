@@ -62,6 +62,8 @@ public class addServlet extends HttpServlet {
             } catch (SmartUploadException e) {
                 e.printStackTrace();
             }
+
+
         //获取添加的水果名
             String fruitsName = request.getParameter("fruitsName");
             //获取添加的水果图片
@@ -85,6 +87,8 @@ public class addServlet extends HttpServlet {
             HibernateUtil.closeSession(session);
 
 
+        }else {
+            request.getRequestDispatcher("/index,jsp").forward(request,response);
         }
 
     }

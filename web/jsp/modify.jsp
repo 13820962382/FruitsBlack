@@ -5,6 +5,7 @@
   Time: 17:54
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -14,111 +15,99 @@
     <title>水果专家</title>
 </head>
 <body>
-<div id="app-inner" style="">
-
-    <div class="page clearfix" style="">
-        <form class="form-horizontal form form-validate" id="form1" action="" method="post" enctype="multipart/form-data" novalidate="novalidate" style="">
-            <h2>编辑水果</h2>
-            <div class="form-group">
-                <label class="col-xs-12 col-sm-3 col-md-2 control-label">水果名称</label>
-                <div class="col-sm-9 col-xs-12">
-                    <input type="text" class="form-control" name="title" value="灵芝烤鸡（45分钟出炉）" required="true" aria-required="true">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-xs-12 col-sm-3 col-md-2 control-label">水果分类</label>
-                <div class="col-sm-9 col-xs-9 col-md-9">
-                    <select name="cid" id="cid" class="form-control">
-                        <option value="5514" selected="">美味烧烤</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-xs-12 col-sm-3 col-md-2 control-label">水果缩略图</label>
-                <div class="col-sm-9 col-xs-12">
-
-                    <script type="text/javascript">
-                        function showImageDialog(elm, opts, options) {
-                            require(["util"], function(util){
-                                var btn = $(elm);
-                                var ipt = btn.parent().prev();
-                                var val = ipt.val();
-                                var img = ipt.parent().next().children();
-                                options = {'global':false,'class_extra':'','direct':true,'multiple':false,'fileSizeLimit':5242880};
-                                util.image(val, function(url){
-                                    if(url.url){
-                                        if(img.length > 0){
-                                            img.get(0).src = url.url;
-                                        }
-                                        ipt.val(url.attachment);
-                                        ipt.attr("filename",url.filename);
-                                        ipt.attr("url",url.url);
-                                    }
-                                    if(url.media_id){
-                                        if(img.length > 0){
-                                            img.get(0).src = "";
-                                        }
-                                        ipt.val(url.media_id);
-                                    }
-                                }, options);
-                            });
-                        }
-                        function deleteImage(elm){
-                            $(elm).prev().attr("src", "./resource/images/nopic.jpg");
-                            $(elm).parent().prev().find("input").val("");
-                        }
-                    </script>
-                    <div class="input-group ">
-                        <input type="text" name="thumb" value="images/34/2018/04/vYYBSZ92yWU99Qg29x2G24z9Ucw9sY.jpg" class="form-control" autocomplete="off">
-                        <span class="input-group-btn">
-				<button class="btn btn-default" type="button" onclick="showImageDialog(this);" data-original-title="" title="">选择图片</button>
-			</span>
-                    </div>
-                    <div class="input-group " style="margin-top:.5em;">
-                        <img src="http://fj.4000073322.com/images/34/2018/04/vYYBSZ92yWU99Qg29x2G24z9Ucw9sY.jpg" onerror="" class="img-responsive img-thumbnail" width="150">
-                        <em class="close" style="position:absolute; top: 0px; right: -14px;" title="删除这张图片" onclick="deleteImage(this)">×</em>
-                    </div>			</div>
-            </div>
-
-
-            <script type="text/javascript">
-                function uploadMultiImage(elm) {
-                    var name = $(elm).next().val();
-                    util.image( "", function(urls){
-                        $.each(urls, function(idx, url){
-                            $(elm).parent().parent().next().append('<div class="multi-item"><img onerror="this.src=\'./resource/images/nopic.jpg\'; this.title=\'图片未找到.\'" src="'+url.url+'" class="img-responsive img-thumbnail"><input type="hidden" name="'+name+'[]" value="'+url.attachment+'"><em class="close" title="删除这张图片" onclick="deleteMultiImage(this)">×</em></div>');
-                        });
-                    }, {"multiple":true,"direct":false,"fileSizeLimit":5242880});
-                }
-                function deleteMultiImage(elm){
-                    $(elm).parent().remove();
-                }
-            </script>
-
-            <div class="form-group">
-                <div class="col-sm-9 col-xs-9 col-md-9">
-                    <input type="hidden" name="token" value="de2b4642">
-                    <input type="submit" value="提交" class="btn btn-primary">
-                </div>
-            </div>
-        </form>
-    </div>
-    <script type="text/javascript">
-        require(['clockpicker'], function($){
-            $('.clockpicker :text').clockpicker({autoclose: true});
-
-            $('#remove-time').click(function(){
-                $("input[name='start_time1']").val("");
-                $("input[name='end_time1']").val("");
-            });
-
-            $('#remove-time1').click(function(){
-                $('input[name="start_time2"]').val("");
-                $('input[name="end_time2"]').val("");
-                $(this).parent().parent().parent().parent().parent().css("display", "none");
-            });
-        });
-    </script>
+<div class="modal-header bg-primary">
+    <h2 class="text-center modal-header">后台管理系统</h2>
 </div>
+<div class="container-fluid">
+    <div class="row">
+        <!--左侧菜单-->
+        <div class="col-md-1 text-center bg-info" style="border-right: white solid 2px">
+            <div class="bg-info h2">管理菜单</div>
+            <ul class="nav nav-pills nav-stacked " style="border-top:solid 1px white">
+                <h3>分类管理</h3>
+                <li class="nav-tabs-justified" onclick="changeRight('jsp/addCategory.jsp')"><a href="#">添加分类</a></li>
+                <li class="nav-tabs-justified" onclick="changeRight('jsp/addFruits.jsp')"><a href="#">添加水果</a></li>
+            </ul>
+
+            <ul class="nav nav-pills nav-stacked ">
+                <h3>图片管理</h3>
+                <li class="nav-tabs-justified"><a href="#" onclick="changeRight('jsp/upload.jsp')">上传图片</a></li>
+                <li class="nav-tabs-justified"><a href="#" onclick="changeRight('')">编辑文字</a></li>
+            </ul>
+        </div>
+
+        <div class="col-md-11 bg-info text-center"><h2>编辑水果</h2></div>
+
+        <!--右侧内容-->
+        <div class="col-md-11" id="content">
+            <div id="app-inner" style="">
+                <div class="page clearfix" style="">
+                    <form class="form-horizontal form form-validate" id="form1" action="${pageContext.request.contextPath}/modify.action" method="post"
+                          enctype="multipart/form-data" novalidate="novalidate" style="">
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">水果名称</label>
+                            <div class="col-sm-9 col-xs-12">
+                                <input type="text" class="form-control" name="fruitsName" value="${fruit.fruitsName}"
+                                       required="true" aria-required="true">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-3 col-md-2 control-label">水果分类</label>
+                            <div class="col-sm-9 col-xs-9 col-md-9">
+                                <%--<input type="text" class="form-control" name="categoryName" value="${fruit.category.categoryName}"--%>
+                                       <%--required="true" aria-required="true">--%>
+                                    <select class="form-control input-sm" id="select" name="categoryName">
+                                        <option value="${fruit.category.categoryName}" selected> ${fruit.category.categoryName} </option>
+                                        <c:choose>
+                                            <c:when test="${options!=null}">
+                                                <c:forEach items="${options}" var="category" varStatus="status">
+                                                    <option value="${category.categoryName}"> ${category.categoryName} </option>
+                                                </c:forEach>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option>请先创建分类</option>
+                                            </c:otherwise>
+                                        </c:choose>
+
+                                    </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="desName" class="col-sm-2 control-label">水果说明</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="des" id="desName" placeholder="${fruit.des}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="myFile" class="col-sm-2 control-label">水果图片（必填）</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="myFile" name="fruitsImg"  type="file">
+                            </div>
+
+                            <div class="col-sm-offset-2">
+                                <img id="previewImg" width="200px" height="300px" src="http://kidle.club:8080/upload/${fruit.fruitsImg}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2">
+                                <input type="hidden" name="fruitsId" value="${fruit.fruitsId}">
+                                <input type="submit" value="提交" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="/js/upload.js"></script>
+<script type="text/javascript" src="/js/chang-url.js"></script>
 </body>
 </html>

@@ -21,7 +21,7 @@ import java.util.Set;
 
 @WebServlet(name = "getServlet")
 public class getServlet extends HttpServlet {
-    private static final String IMG_PATH = "http://kidle.club:8080/upload/";
+    private static final String IMG_PATH = "http://kidle.club:8080/upload/";//图片存储路径
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

@@ -32,7 +32,6 @@
                     <td>${category.totalFruits}</td>
                     <td>${category.des}</td>
                     <td><a href="/delete.action?type=category&categoryId=${category.categoryId}">删除</a> &nbsp;&nbsp;&nbsp;
-                        <a href="modify.jsp">修改</a>
                     </td>
                 </tr>
             </c:forEach>

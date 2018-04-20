@@ -67,7 +67,7 @@ public class FruitsEntity implements Serializable{
         this.des = des;
     }
 
-    @ManyToOne(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.MERGE},fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id",referencedColumnName = "CATEGORY_ID")
     public CategoryEntity getCategory() {
         return category;

@@ -36,8 +36,8 @@
                 <td>${fruits.fruitsName}</td>
                 <td>${fruits.category}</td>
                 <td>${fruits.des}</td>
-                <td><a href="/delete.action?type=fruits&fruitsId=${fruits.fruitsId}">删除</a> &nbsp;&nbsp;&nbsp;
-                    <a href="modify.jsp">修改</a>
+                <td><a href="${pageContext.request.contextPath}/delete.action?type=fruits&fruitsId=${fruits.fruitsId}">删除</a> &nbsp;&nbsp;&nbsp;
+                    <a href="${pageContext.request.contextPath}/query.action?type=fruits&fruitsId=${fruits.fruitsId}">修改</a>
                 </td>
             </tr>
             </c:forEach>

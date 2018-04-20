@@ -59,4 +59,26 @@
         <url-pattern>/delete.action</url-pattern>
     </servlet-mapping>
 
+    <!--查询-->
+    <servlet>
+        <servlet-name>queryServlet</servlet-name>
+        <servlet-class>servlet.QueryServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>queryServlet</servlet-name>
+        <url-pattern>/query.action</url-pattern>
+    </servlet-mapping>
+
+    <!--修改-->
+    <servlet>
+        <servlet-name>modifyServlet</servlet-name>
+        <servlet-class>servlet.ModifyServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>modifyServlet</servlet-name>
+        <url-pattern>/modify.action</url-pattern>
+    </servlet-mapping>
+
 </web-app>

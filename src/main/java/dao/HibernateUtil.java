@@ -21,6 +21,9 @@ public class HibernateUtil {
    private static Transaction transaction;
     private static StandardServiceRegistry serviceRegistry;
 
+    /*
+    * 获取session对象
+    * */
     public static Session getHibernateSession(){
         //创建Configuration对象：对应包含hibernate的基本配置信息（cfg）和对象关系映射信息（hbm）
         Configuration configuration = new Configuration().configure();
@@ -31,6 +34,25 @@ public class HibernateUtil {
         sessionFactory = new MetadataSources(serviceRegistry).buildMetadata().buildSessionFactory();
         //获取会话对象
         session = sessionFactory.openSession();
+        //开启事务
+        transaction = session.beginTransaction();
+
+        return session;
+    }
+
+    /*
+    * 获取当前session对象
+    * */
+    public static Session getCurrentSession(){
+        //创建Configuration对象：对应包含hibernate的基本配置信息（cfg）和对象关系映射信息（hbm）
+        Configuration configuration = new Configuration().configure();
+        //创建注册服务对象
+        serviceRegistry = new StandardServiceRegistryBuilder().configure().build();
+//        serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        //创建会话工厂
+        sessionFactory = new MetadataSources(serviceRegistry).buildMetadata().buildSessionFactory();
+        //获取会话对象
+        session = sessionFactory.getCurrentSession();
         //开启事务
         transaction = session.beginTransaction();
 
