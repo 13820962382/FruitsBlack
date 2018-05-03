@@ -31,7 +31,7 @@
       <ul class="nav nav-pills nav-stacked ">
         <h3>图片管理</h3>
         <li class="nav-tabs-justified"><a href="#" onclick="changeRight('jsp/upload.jsp')">上传图片</a></li>
-        <li class="nav-tabs-justified"><a href="#" onclick="changeRight('')">编辑文字</a></li>
+        <li class="nav-tabs-justified"><a href="#" onclick="changeRight('jsp/editor.jsp')">编辑文字</a></li>
       </ul>
     </div>
 
